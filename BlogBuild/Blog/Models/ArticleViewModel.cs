@@ -26,5 +26,7 @@ namespace Blog.Models
 
         public string Tags { get; set; }
 
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }
