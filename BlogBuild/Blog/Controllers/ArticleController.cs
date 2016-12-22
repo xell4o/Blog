@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Blog.Controllers
 {
@@ -104,7 +105,7 @@ namespace Blog.Controllers
 
         private void SetArticleTags(Article article, ArticleViewModel model, BlogDbContext database)
         {
-           
+              
             // Split tags
             var tagsStrings = model.Tags
                 .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
