@@ -224,7 +224,7 @@ namespace Blog.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<ActionResult> ChangePassword(ChangeFullNameModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -243,7 +243,7 @@ namespace Blog.Controllers
             AddErrors(result);
             return View(model);
         }
-
+        
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
@@ -359,6 +359,16 @@ namespace Blog.Controllers
             if (user != null)
             {
                 return user.PasswordHash != null;
+            }
+            return false;
+        }
+
+        private bool HasFullName()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.FullName != null;
             }
             return false;
         }

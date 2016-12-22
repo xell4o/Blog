@@ -1,4 +1,5 @@
 ﻿using Blog.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -42,19 +43,27 @@ namespace Blog.Controllers.Admin
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            if (ModelState.IsValid)
+            try
             {
-                using (var database = new BlogDbContext())
+                if (ModelState.IsValid)
                 {
-                    database.Categories.Add(category);
-                    database.SaveChanges();
+                    using (var database = new BlogDbContext())
+                    {
+                        database.Categories.Add(category);
+                        database.SaveChanges();
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
             }
 
             return View(category);
         }
+        
 
         //
         // GET: Category/Edit
@@ -82,15 +91,22 @@ namespace Blog.Controllers.Admin
         [HttpPost]
         public ActionResult Edit(Category category)
         {
-            if (ModelState.IsValid)
+            try
             {
-                using (var database = new BlogDbContext())
+                if (ModelState.IsValid)
                 {
-                    database.Entry(category).State = EntityState.Modified;
-                    database.SaveChanges();
+                    using (var database = new BlogDbContext())
+                    {
+                        database.Entry(category).State = EntityState.Modified;
+                        database.SaveChanges();
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
             }
             return View(category);
         }

@@ -39,7 +39,7 @@ namespace Blog.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class ChangePasswordViewModel
+    public class ChangeFullNameModel
     {
         [Required]
         [DataType(DataType.Password)]
@@ -57,7 +57,7 @@ namespace Blog.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-
+    
     public class AddPhoneNumberViewModel
     {
         [Required]
